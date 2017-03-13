@@ -37,7 +37,7 @@ public class DistinctExampleFragment extends Fragment {
     private ArrayList<AppInfo> mAddedApps = new ArrayList<>();
 
     public DistinctExampleFragment() {
-    }
+    }//ss
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
