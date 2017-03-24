@@ -129,5 +129,48 @@ ArrayList<AppInfo> testList = new ArrayList<>();
 - 쓰레드 스케줄러는 위 링크 참고
 
 
+<!-- 03.24 -->
+
+# Observables 결합
+- 여러 개의 소스 Observable들을 하나의 Observable로 만드는 연산자들
+
+## merge()
+- 복수 개의 Observable들이 배출하는 항목들을 머지시켜 하나의 Observable로 만든다
+- 다중입력 > 단일출력
+- 다수의 Observable를 병합하여 이벤트가 발생 된 순서대로 이벤트를 전달, 
+  한 Observable에서 error가 발생하면 다른 Observable에서 발생된 이벤트는 전달하지 않음
+  > 따라서, mergeDelayError()를 해야 에러를 던지더라도 다른 이벤트 중단하지 않으려면 사용해야함.
+  
+## zip()
+- 각 observable에서 발생한 순번의 것들을 서로 묶어준다.
+- 2개의 옵저버블과 Func2로 구성된 3개의 인자를 갖는다.
+
+## join()
+- A Observable과 B Observable이 배출한 항목들을 결합하는데, 이때 B Observable은 배출한 항목이 타임 윈도우를 가지고 있고 
+  이 타임 윈도우가 열린 동안 A Observable은 항목의 배출을 계속한다. Join 연산자는 B Observable의 항목
+  을 배출하고 배출된 항목은 타임 윈도우를 시작시킨다. 타임 윈도우가 열려 있는 동안 A Observable은 자신의 항목들을 계속 배출하여 
+  이 두 항목들을 결합한다
+  >> timer 2 확인 필요
+  
+## combineLatest()
+https://realm.io/kr/news/rxandroid-3/
+- checks1과 testExists 두가지 옵저버블 값을 가져오는데 둘 중 하나의 값이 변경될 때 마다 뒤의 람다 함수 
+  (check, exist) -> !check || exist가 호출이 되어 Observable<Boolean>에 데이터가 흘러가게 된다.
+- combileLatest를 이용하면 UI가 변경되었을 때 복합적으로 동작하는 UI를 쉽게 다룰 수 있다.
+
+## and() then() when()
+http://reactivex.io/documentation/ko/operators/and-then-when.html
+- 두 개 이상의 Observable들이 배출한 항목들을 'Pattern'과 'Plan' 중계자를 이용해서 결합한다
+
+## switch()
+- Observable들을 배출하는 Observable을 싱글 Observable로 변환하다. 
+  변환된 싱글 Observable은 변환 전 소스 Observable들이 배출한 항목들을 배출한다
+
+## startwith()
+- 소스 Observable이 항목을 배출하기 전에 다른 항목들을 앞에 추가한 후 배출한다
+
+
+
 # 추가 학습 링크
 - [https://realm.io/kr/news/rxandroid/](https://realm.io/kr/news/rxandroid/)
+-  http://chuumong.tistory.com/entry/RxJava-정리
